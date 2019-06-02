@@ -1,0 +1,24 @@
+{
+	"name": "electra-config",
+	"minimum-stability": "dev",
+	"repositories": [
+		{
+			"type": "vcs",
+			"url":  "https://github.com/ieatstickers/electra-utility.git"
+		}
+	],
+	"require": {
+		"electra-utility": "dev-master",
+		"symfony/yaml": "^4.2"
+	},
+	"authors": [
+		{
+			"name": "Mike Burke"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Electra\\Config\\": "src"
+		}
+	}
+}
