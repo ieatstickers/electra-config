@@ -108,6 +108,11 @@ class Config
             // Parse it
             $fileAsArray = Yaml::parse($fileContents);
 
+            if (!$fileAsArray)
+            {
+              continue;
+            }
+
             // Cache it
             $configCache[$configDirectory][$file] = $fileAsArray;
 
