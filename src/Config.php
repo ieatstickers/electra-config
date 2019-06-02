@@ -1,6 +1,6 @@
 <?php
 
-namespace Electra\Module\Config\Data;
+namespace Electra\Config;
 
 use Electra\Utility\Strings;
 use Symfony\Component\Yaml\Yaml;
