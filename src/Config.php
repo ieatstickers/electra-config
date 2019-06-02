@@ -2,6 +2,7 @@
 
 namespace Electra\Config;
 
+use Electra\Utility\Arrays;
 use Electra\Utility\Strings;
 use Symfony\Component\Yaml\Yaml;
 
@@ -17,6 +18,14 @@ class Config
   public static function addConfigDir(string $configDir)
   {
     self::$configDirs[] = $configDir;
+  }
+
+  /**
+   * @param array $configDirs
+   */
+  public static function setConfigDirs(array $configDirs)
+  {
+    self::$configDirs = $configDirs;
   }
 
   /**
@@ -60,7 +69,7 @@ class Config
             // For each file, merge if it matches the rule
             if (preg_match($mergeRuleRegex, $filePath))
             {
-              array_merge_recursive($mergedConfig, $configArray);
+              $mergedConfig = array_replace_recursive($mergedConfig, $configArray);
             }
           }
         }
@@ -94,7 +103,7 @@ class Config
             }
 
             // Read it in
-            $fileContents = file_get_contents($configDirectory . '/' . $file);
+            $fileContents = file_get_contents(realpath($configDirectory . '/' . $file));
 
             // Parse it
             $fileAsArray = Yaml::parse($fileContents);
@@ -102,12 +111,10 @@ class Config
             // Cache it
             $configCache[$configDirectory][$file] = $fileAsArray;
 
-            // Merge if regex matches
-
             // For each file, merge if it matches the rule
             if (preg_match($mergeRuleRegex, $file))
             {
-              array_merge_recursive($mergedConfig, $fileAsArray);
+              $mergedConfig = array_replace_recursive($mergedConfig, $fileAsArray);
             }
           }
         }
@@ -132,52 +139,6 @@ class Config
    */
   public static function getByPath(string $configPath)
   {
-    // Split config path into an array of keys
-    $configPathArray = explode(':', $configPath);
-
-    return self::getByPathArray($configPathArray);
-  }
-
-  /**
-   * @param array $pathArray
-   * @param array | null $configArray
-   * @return Config|mixed|null
-   */
-  private static function getByPathArray(array $pathArray, array $configArray = null)
-  {
-    if (!$configArray)
-    {
-      $configArray = self::$configArray;
-    }
-
-    foreach ($pathArray as $key)
-    {
-      array_shift($pathArray);
-
-      if (isset($configArray[$key]))
-      {
-        // Search finished
-        if (empty($pathArray))
-        {
-          // Search finished
-          if (!isset($configArray[$key]))
-          {
-            return null;
-          }
-
-          return $configArray[$key];
-        }
-        else
-        {
-          return self::getByPathArray($pathArray, $configArray[$key]);
-        }
-      }
-      else
-      {
-        return null;
-      }
-    }
-
-    return null;
+    return Arrays::getByKeyPath($configPath, self::$configArray);
   }
 }
