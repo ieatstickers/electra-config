@@ -28,6 +28,11 @@ class Config
     self::$configDirs = $configDirs;
   }
 
+  public static function setConfigArray(array $configArray)
+  {
+    self::$configArray = $configArray;
+  }
+
   /**
    * @param string $regex
    */

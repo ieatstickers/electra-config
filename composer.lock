@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ieatstickers/electra-utility.git",
-                "reference": "684b7d1bd64438e272ce776635c94381427c500e"
+                "reference": "9f5a5b587d8edc773cfa5c95259e2eba4b4161d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ieatstickers/electra-utility/zipball/684b7d1bd64438e272ce776635c94381427c500e",
-                "reference": "684b7d1bd64438e272ce776635c94381427c500e",
+                "url": "https://api.github.com/repos/ieatstickers/electra-utility/zipball/9f5a5b587d8edc773cfa5c95259e2eba4b4161d6",
+                "reference": "9f5a5b587d8edc773cfa5c95259e2eba4b4161d6",
                 "shasum": ""
             },
             "type": "library",
@@ -35,7 +35,7 @@
                 "source": "https://github.com/ieatstickers/electra-utility/tree/master",
                 "issues": "https://github.com/ieatstickers/electra-utility/issues"
             },
-            "time": "2019-06-02T08:36:10+00:00"
+            "time": "2019-06-02T12:13:29+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
