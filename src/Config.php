@@ -28,6 +28,9 @@ class Config
     self::$configDirs = $configDirs;
   }
 
+  /**
+   * @param array $configArray
+   */
   public static function setConfigArray(array $configArray)
   {
     self::$configArray = $configArray;

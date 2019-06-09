@@ -1,10 +1,10 @@
 {
-	"name": "electra-config",
+	"name": "electra/config",
 	"minimum-stability": "dev",
 	"repositories": [
 		{
 			"type": "vcs",
-			"url":  "https://github.com/ieatstickers/electra-utility.git"
+			"url":  "https://github.com/ieatstickers/utility.git"
 		}
 	],
 	"require": {
