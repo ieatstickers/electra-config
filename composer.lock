@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "28b244e573abb2a18e5b19b43b10d5d0",
+    "content-hash": "5b2e96c49b90d75b5bec715397860208",
     "packages": [
         {
-            "name": "electra-utility",
+            "name": "electra/utility",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ieatstickers/electra-utility.git",
-                "reference": "9f5a5b587d8edc773cfa5c95259e2eba4b4161d6"
+                "reference": "ed3d08d7a7a1320584b242b511ac9947122b082b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ieatstickers/electra-utility/zipball/9f5a5b587d8edc773cfa5c95259e2eba4b4161d6",
-                "reference": "9f5a5b587d8edc773cfa5c95259e2eba4b4161d6",
+                "url": "https://api.github.com/repos/ieatstickers/electra-utility/zipball/ed3d08d7a7a1320584b242b511ac9947122b082b",
+                "reference": "ed3d08d7a7a1320584b242b511ac9947122b082b",
                 "shasum": ""
             },
             "type": "library",
@@ -35,7 +35,7 @@
                 "source": "https://github.com/ieatstickers/electra-utility/tree/master",
                 "issues": "https://github.com/ieatstickers/electra-utility/issues"
             },
-            "time": "2019-06-02T12:13:29+00:00"
+            "time": "2019-06-09T19:52:38+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -159,7 +159,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "electra-utility": 20
+        "electra/utility": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
