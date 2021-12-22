@@ -8,7 +8,7 @@
 		}
 	],
 	"require": {
-		"electra/utility": "dev-master",
+		"electra/utility": "dev-php8.1-upgrade",
 		"symfony/yaml": "^4.2"
 	},
 	"authors": [
