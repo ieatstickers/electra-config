@@ -8,65 +8,78 @@ use Symfony\Component\Yaml\Yaml;
 
 class Config
 {
-  protected static $configArray = [];
-  protected static $configDirs = [];
-  protected static $mergeRules = [];
+  protected $configArray = [];
+  protected $configDirs = [];
+  protected $mergeRules = [];
 
-  /**
-   * @param string $configDir
-   */
-  public static function addConfigDir(string $configDir)
-  {
-    self::$configDirs[] = $configDir;
-  }
+  protected function __construct() {}
 
   /**
    * @param array $configDirs
+   * @param array $mergeRules
+   *
+   * @return Config
+   * @throws \Exception
    */
-  public static function setConfigDirs(array $configDirs)
+  public static function create(array $configDirs, array $mergeRules): Config
   {
-    self::$configDirs = $configDirs;
+    $config = (new Config())
+      ->addConfigDir(...$configDirs)
+      ->addMergeRule(...$mergeRules);
+
+    $config->generate();
+
+    return $config;
+  }
+
+  /**
+   * @param string ...$configDir
+   *
+   * @return $this
+   */
+  public function addConfigDir(string ...$configDir): Config
+  {
+    $this->configDirs = array_merge($this->configDirs, $configDir);
+    return $this;
   }
 
   /**
    * @param array $configArray
+   *
+   * @return $this
    */
-  public static function setConfigArray(array $configArray)
+  public function setConfigArray(array $configArray): Config
   {
-    self::$configArray = $configArray;
+    $this->configArray = $configArray;
+    return $this;
   }
 
   /**
-   * @param string $regex
+   * @param string ...$regex
+   *
+   * @return $this
    */
-  public static function addMergeRule(string $regex)
+  public function addMergeRule(string ...$regex): Config
   {
-    self::$mergeRules[] = $regex;
-  }
-
-  /**
-   * @param array $mergeRules
-   */
-  public static function setMergeRules(array $mergeRules)
-  {
-    self::$mergeRules = $mergeRules;
+    $this->mergeRules = array_merge($this->mergeRules, $regex);
+    return $this;
   }
 
   /**
    * @return array
    * @throws \Exception
    */
-  public static function generate()
+  public function generate()
   {
     // Init config cache
     $configCache = [];
     $mergedConfig = [];
 
     // For each rule
-    foreach (self::$mergeRules as $mergeRuleRegex)
+    foreach ($this->mergeRules as $mergeRuleRegex)
     {
       // For each config directory
-      foreach (self::$configDirs as $configDirectory)
+      foreach ($this->configDirs as $configDirectory)
       {
         // if there is a cache for the directory
         if (isset($configCache[$configDirectory]))
@@ -134,24 +147,23 @@ class Config
       }
     }
 
-    self::$configArray = $mergedConfig;
+    $this->configArray = $mergedConfig;
     return $mergedConfig;
   }
 
-  /**
-   * @return array
-   */
-  public static function toArray()
+  /** @return array */
+  public function toArray(): array
   {
-    return self::$configArray;
+    return $this->configArray;
   }
 
   /**
    * @param string $configPath
-   * @return Config | mixed | null
+   *
+   * @return mixed|null
    */
-  public static function getByPath(string $configPath)
+  public function getByPath(string $configPath)
   {
-    return Arrays::getByKeyPath($configPath, self::$configArray);
+    return Arrays::getByKeyPath($configPath, $this->configArray);
   }
 }
